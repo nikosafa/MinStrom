@@ -1,6 +1,5 @@
 package com.example.minstrom.ui.screens
 
-import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -8,10 +7,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.minstrom.ui.viewModel.NotificationViewModel
 
 @Composable
-fun NotificationTestScreen(viewModel: ViewModel) {
+fun NotificationTestScreen(viewModel: NotificationViewModel = viewModel()) {
     val context = LocalContext.current
     Column(
         modifier = Modifier
@@ -32,4 +32,12 @@ fun NotificationTestScreen(viewModel: ViewModel) {
             Text("Send notification")
         }
     }
+}
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
 }
