@@ -19,23 +19,12 @@ const val channelName = "com.example.minstrom"
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        println("Message received from cloud")
-        // Check if the notification payload exists
         remoteMessage.notification?.let {
             generateNotification(it.title ?: "No Title", it.body ?: "No Message")
         }
     }
 
-    private fun getRemoteView(title: String, message: String): RemoteViews {
-        val remoteView = RemoteViews("com.example.minstrom", R.layout.notification)
-        remoteView.setTextViewText(R.id.title, title)
-        remoteView.setTextViewText(R.id.message, message)
-        remoteView.setImageViewResource(R.id.app_logo, R.drawable.skaermbillede)
-        return remoteView
-    }
-
     private fun generateNotification(title: String, message: String) {
-        println("Generating notification")
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
@@ -49,7 +38,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
             .setContentIntent(pendingIntent)
-           // .setContent(getRemoteView(title, message))
             .setContentTitle(title)
             .setContentText(message)
 
